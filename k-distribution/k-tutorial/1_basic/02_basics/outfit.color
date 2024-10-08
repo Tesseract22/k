@@ -1,0 +1,6 @@
+outfitMatching(Outfit( 
+    Hat(Black()), 
+    Shirt(Black()), 
+    Pant(Black()), 
+    Shoe(White())
+  ))
