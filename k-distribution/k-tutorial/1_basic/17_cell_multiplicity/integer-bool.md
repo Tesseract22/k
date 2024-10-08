@@ -46,8 +46,12 @@ On top of that, we also have relational operator for integer.
                   <k> $PGM:Pgm ~> main () </k>
                   <state> .Map </state>
                   <declared> .Set </declared>
-                  <functions> .Map </functions>
-                  <fdeclared> .Set </fdeclared>
+                  <functions>
+                    <function multiplicity="*" type="Map">
+                        <name> main </name>
+                        <body> .Stmts </body>
+                    </function>
+                  </functions>
                   <fstack> .List </fstack>
                  </T>
 
@@ -93,9 +97,7 @@ Here is the semantics for this languge
 
     // function definitions
     rule <k> fun X:Id () { S } => . ...</k>
-        <functions>... .Map => X |-> S ...</functions>
-        <fdeclared> FD => FD SetItem(X) </fdeclared>
-    requires notBool X in FD
+        (.Bag => <function> <name> X </name> <body> S </body> </function>)
 
     // return statement
     rule <k> return I ; ~> _ => I ~> K </k>
@@ -122,7 +124,7 @@ Here is the semantics for this languge
     // function call
     syntax KItem ::= stackFrame(K)
     rule <k> X:Id () ~> K => S </k>
-        <functions>... X |-> S ...</functions>
+        <function> <name> X </name> <body> S </body> </function>
         <fstack> .List => ListItem(stackFrame(K, STATE, D)) ...</fstack>
         <state> STATE => .Map </state>
         <declared> D => .Set </declared>

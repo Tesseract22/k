@@ -1,0 +1,11 @@
+fun main() {
+    int x = 2;
+    return x > f();
+}
+
+fun f() {
+    int y = 3;
+    y = y + 3;
+    return y;
+}
+

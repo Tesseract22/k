@@ -54,5 +54,12 @@ module LESSON-22-SPEC
             $c |-> (C:Int => C -Int B)
         </store>
         requires B >=Int 0
+    claim
+	<k>
+	    def main (a) { }
+
+	    => . ...
+
+	</k>
 
 endmodule

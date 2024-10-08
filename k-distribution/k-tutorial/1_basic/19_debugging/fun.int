@@ -1,0 +1,14 @@
+fun main() {
+    int x = 2;
+    return x + f();
+}
+
+fun f() {
+    int y = 3;
+    y = y + 3;
+    if (y == 6) {
+	return y * y;
+    }
+    return y;
+}
+

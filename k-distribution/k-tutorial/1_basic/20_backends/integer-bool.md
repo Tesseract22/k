@@ -9,6 +9,7 @@ module INTEGER-BOOL
     imports MAP
     imports SET
     imports LIST
+    imports K-EQUAL
 
 
 ```
@@ -37,6 +38,7 @@ On top of that, we also have relational operator for integer.
     syntax Stmt ::= "return" Exp ";" [strict(1)]
                 |   Id "=" Exp ";" [strict(2)]
                 |   "int" Id "=" Exp ";" [strict(2)]
+                |   "if" Exp "{" Stmts "}" [strict(1)]
     syntax Stmts ::= List{Stmt, ""} 
     syntax Decl ::= "fun" Id "(" ")" "{" Stmts "}"
     syntax Pgm  ::= List{Decl, ""}
@@ -107,6 +109,9 @@ Here is the semantics for this languge
     rule <k> X:Id = I;  => . ...</k>
         <state> STATE => STATE [ X <- I] </state>
         <declared>... SetItem(X) ...</declared>
+
+    // if statement 
+    rule <k> if B:Bool { SS:Stmts } => #if B #then SS #else . #fi ...</k>
 
     // variable declaration
     rule <k> int X:Id = I:Int ; => . ...</k>
